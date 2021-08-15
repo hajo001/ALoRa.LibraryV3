@@ -2,6 +2,7 @@
  TTN V3
  A simple console app can be created as follows
 
+```C#
 class Program
 {
     static void Main(string[] args)
@@ -27,3 +28,4 @@ class Program
         Console.WriteLine($"Message Timestamp: {obj.Timestamp}, Device: {obj.DeviceID}, Topic: {obj.Topic}, Payload: {data}");
     }
 }
+```
