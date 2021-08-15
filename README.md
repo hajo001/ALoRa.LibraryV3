@@ -1,6 +1,7 @@
 # ALoRa.LibraryV3
- TTN V3
- A simple console app can be created as follows
+For TTN V3
+
+A simple console app can be created as follows
 
 ```C#
 class Program
