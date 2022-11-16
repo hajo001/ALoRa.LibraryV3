@@ -1,4 +1,4 @@
-﻿
+
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 
@@ -18,6 +18,7 @@ public class TTNApplication : BaseObject
 
     private readonly MqttClient m_client;
     private Action<TTNMessage>? m_msgReceived;
+    private bool _disposed = false;
 
     public event Action<TTNMessage> MessageReceived
     {
@@ -87,6 +88,7 @@ public class TTNApplication : BaseObject
     protected override void Dispose(bool disposing)
     {
         m_client.Disconnect();
+        _disposed = true;
     }
 
     /// <summary>
@@ -126,8 +128,10 @@ public class TTNApplication : BaseObject
     private void Client_MqttConnectionClosed(object sender, EventArgs e)
     {
         Console.WriteLine($"{Environment.NewLine}Client_MqttConnectionClosed: {sender.ToString()}", Color.Red);
-        Console.WriteLine($"{Environment.NewLine}Trying To Reconnect!", Color.Blue);
-        TryToReconnect();
+        if (!_disposed)
+        {
+            Console.WriteLine($"{Environment.NewLine}Trying To Reconnect!", Color.Blue);
+            TryToReconnect();
+        }
     }
 }
-
